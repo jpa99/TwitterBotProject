@@ -1,0 +1,565 @@
+<!doctype html>
+<html>
+<head>
+
+<script type="text/javascript" src="{{url_for('static', filename='canvasjs.min.js')}}"></script>
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+-->
+
+<script src="https://docs.handsontable.com/pro/1.11.0-beta1/scripts/jquery.min.js"></script>
+<script src="https://docs.handsontable.com/pro/1.10.2/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script>
+<link type="text/css" rel="stylesheet" href="http://docs.handsontable.com/pro/1.10.2/bower_components/handsontable-pro/dist/handsontable.full.min.css">
+
+<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script> 
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+
+<!--
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='handsontable.full.css') }}">
+-->
+
+<style type="text/css">
+html, body
+{
+    height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.dropdown-menu{
+   max-height:300px;
+   overflow-y: scroll;
+}
+</style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><h4>Twitter Spam Monitor</h4></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><h4>Select another url</h4>
+
+        <span class="caret" style="width:6px; float:right;background-position:50% -133px; height:6px;"></span></a>
+        <ul class="dropdown-menu scrollable-menu" role="menu">
+          {% for entry in entries %}
+            <li><a class="dropDownListItem" href="#">{{ entry|safe }}</a></li>
+           {% endfor %}
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ">  
+      <li><h3><span class="label label-default" id="prefix_text">Current URL: ebay</span></h3></li>
+      <li><h3><span class="label label-default" id="group_id_text">Current group id: 1</span></h3></li>
+    </ul>
+  </div>
+</nav>
+
+    <br><br><br><br>
+
+        <div class="row" >
+          <div class="col-md-4">
+            <div class="thumbnail">
+            <img src="https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_003_twitter_social_network_android_material-256.png"  class = "img-responsive" width = "50%" height = "50%" align="middle" alt = "App: Time to exercise">
+              <div class="caption">
+                <h3>What is this</h3>
+                <p>Twitter Spam Monitor visualizes Twitter spam accounts <font style="font-family:verdana;color:green;font-weight:bold">in real time</font>.</p>
+                <p>All spam groups use url service(s) to do <font style="font-family:verdana;color:green;font-weight:bold">link farming and click bait</font>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="thumbnail">
+            <img src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/table-256.png"  class = "img-responsive" width = "50%" height = "50%" align="middle" alt = "App: Time to exercise">
+              <div class="caption">
+                <h3>How to use</h3>
+                <p>The top table shows all spam groups that are abusing a given url service. The bottom table displays detailed information about all accounts in one spam group. <font style="font-family:verdana;color:green;font-weight:bold">Click the spam_group_id </font> that you are intereted in! </p>
+
+                <p>Click <font style="font-family:verdana;color:green;font-weight:bold">Select another url </font>(on the very top) to explore more.</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="thumbnail">
+            <img src="https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/lock-256.png"  class = "img-responsive" width = "50%" height = "50%" align="middle" alt = "App: Time to exercise">
+              <div class="caption">
+                <h3>Why should I care</h3>
+                <p>Twitter Spam Monitor helps <font style="font-family:verdana;color:green;font-weight:bold">protect your privacy and clean your Twitter data</font>.</p>
+                <br>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- <h3 id="timestamp"></h3> -->
+<div align="center">
+
+
+<div class="row" >
+  <!--Custom Legends on the left-->
+  <div class="col-md-2">  
+    <div style="height: 150px"></div>
+    <div id="legends" align="center" style="font-size: 21px;">
+      <ul style="list-style: square;" id="legendList">      
+      </ul>
+    </div>
+  </div>
+
+  <!--Pie chart on the right-->
+  <div class="col-md-10">  
+    <div id="pieContainer" style="height: 800px; width: 100%;"></div>
+  </div>  
+</div>
+
+<div id="chartContainer" align="center" style="height: 2200px; width: 95%;"></div>  
+</div>
+
+<div id="spam_info">
+  <br><br>
+</div>
+<div id="metainfo"></div>
+<!-- <div id="includedSocialNetwork" style="height: 200px"></div> -->
+<!-- note: if the src it's json then it's effectively a download -->
+<iframe src="" width="100%" height="600px" seamless frameBorder="0" scrolling="no" id="includedSocialNetwork"></iframe>
+<div id="userinfo"></div>
+
+</div> 
+<!--  Set up the footer -->
+    <div class = "container footer">
+      <br>
+      <p class = "text-center" style = "color:black">Copyright 2017© - Site designed by Zhouhan Chen</p>
+</div>  
+
+
+<script>
+  // define global variables
+  var chart;
+  
+  var piechart;
+
+  var dataObject = [];
+
+  var metaObject = [];
+
+  var urlObject = [];
+  
+  var prefix = 'ebay';
+
+  var spam_group_id = 1;
+
+  var langCodes = {'en': 'http://findicons.com/files/icons/282/flags/48/united_states_of_america_usa.png', 'es': 'http://findicons.com/files/icons/282/flags/48/mexico.png', 'ru': 'http://findicons.com/files/icons/281/flag_3/48/russia_flag.png', 'tr': 'http://findicons.com/files/icons/282/flags/48/turkey.png', 'de': 'http://findicons.com/files/icons/282/flags/48/germany.png', 'zh-cn': 'http://findicons.com/files/icons/282/flags/48/china.png', 'pt': 'http://findicons.com/files/icons/282/flags/48/portugal.png', 'ja': 'http://findicons.com/files/icons/282/flags/48/japan.png', 'it': 'http://findicons.com/files/icons/282/flags/48/italy.png', 'fr':
+      'http://findicons.com/files/icons/282/flags/48/france.png', 'ar':
+      'http://findicons.com/files/icons/282/flags/48/united_arab_emirates.png', 'pl': 'http://findicons.com/files/icons/282/flags/48/poland.png', 'ko': 'http://findicons.com/files/icons/282/flags/48/south_korea.png', 'en-gb': 'http://findicons.com/files/icons/282/flags/48/united_kingdom_great_britain.png', 'sv': 'http://findicons.com/files/icons/282/flags/48/sweden.png'};
+
+  // start meta table
+  var metaElement = document.querySelector('#metainfo');
+  var metaElementContainer = metaElement.parentNode;
+  
+  var metaSettings = {
+    data: metaObject,
+    columns: [
+        {
+            data: 'spam_group_id',
+            renderer: actionRenderer,
+        },
+        {
+            data: 'total_user',
+            type: 'numeric',
+        },
+        {
+            data: 'top_one_website',
+            type: 'text',
+            renderer: "html",
+        },
+    ],
+    stretchH: 'all',
+    autoWrapRow: true,
+    rowHeaders: true,
+    colHeaders: [
+        'spam_group_id',
+        'total_user',
+        'top_one_website',
+    ],
+    columnSorting: true,
+    sortIndicator: true,
+    manualRowMove: true,
+    manualColumnMove: true,
+    contextMenu: true
+  };
+
+  var metaTable = new Handsontable(metaElement, metaSettings);
+  // end meta table
+
+
+  // start user info table
+  var userinfoElement = document.querySelector('#userinfo');
+  var userinfoElementContainer = userinfoElement.parentNode;
+  var userinfoSettings = {
+    data: dataObject,
+    columns: [
+        {
+            data: 'id',
+            type: 'numeric',
+        },
+        {
+            data: 'screen_name',
+            type: 'text',
+            renderer: "html",
+        },
+        {
+            data: 'statuses_count',
+			      type: 'numeric',
+        },
+        {
+            data: 'friends_count',
+            type: 'numeric',
+        },
+        {
+            data: 'followers_count',
+            type: 'numeric',
+        },
+        {
+            data: 'lang',
+            renderer: flagRenderer
+        },
+        {
+            data: 'verified',
+            type: 'text',
+        },
+        {
+            data: 'created_at',
+            dateFormat: 'MM/DD/YYYY',
+            correctFormat: true,
+            defaultDate: '01/01/2000'
+        },
+        {
+            data: 'profile',
+            renderer: coverRenderer
+        },
+    ],
+    stretchH: 'all',
+    //width: 806,
+    autoWrapRow: true,
+    //height: 441,
+    //maxRows: 22,
+    rowHeaders: true,
+    colHeaders: [
+        'id',
+        'screen_name',
+        'statuses_count',
+        'friends_count',
+        'followers_count',
+        'lang',
+        'verified',
+        'created_at',
+        'profile',
+    ],
+    columnSorting: true,
+    sortIndicator: true,
+    // autoColumnSize: {
+    //     samplingRatio: 23
+    // },
+    manualRowMove: true,
+    manualColumnMove: true,
+    contextMenu: true
+  };
+
+  var userinfoTable = new Handsontable(userinfoElement, userinfoSettings);
+  // end userinfoTable
+
+  var updateUrlInfo = function () {
+        var request = {"prefix": prefix, "spam_group_id": spam_group_id};
+        $.ajax({
+          type: "POST",
+          url: "/urlinfo",
+          async: false,
+          contentType: "application/json",
+          data: JSON.stringify(request),
+          dataType: "json",
+          success: function (mydata) {
+
+            // update chart
+            chart.options.data[0].dataPoints.length = 0
+            arrayLength = mydata['barchart'].length;
+            for (var i = 0; i < arrayLength; i++) {
+                chart.options.data[0].dataPoints.push(mydata['barchart'][arrayLength-i-1]);
+            }
+            chart.render();
+
+            // update pie chart
+            piechart.options.data[0].dataPoints.length = 0
+            arrayLength = mydata['piechart'].length;
+            for (var i = 0; i < arrayLength; i++) {
+                piechart.options.data[0].dataPoints.push(mydata['piechart'][arrayLength-i-1]);
+            }
+            piechart.render();
+            
+            var dt = new Date();
+            var utcDate = dt.toUTCString();
+            piechart.options.title.text = 'Twitter URL Analyzed: ' + mydata['total_url'];
+            //$("#timestamp").text("Last update: " + utcDate);
+            
+          }
+        });     
+        };
+
+  var updateChart = function () {
+        var request = {"prefix": prefix, "spam_group_id": spam_group_id};
+        $.ajax({
+          type: "POST",
+          url: "/refresh",
+          async: false,
+          contentType: "application/json",
+          data: JSON.stringify(request),
+          dataType: "json",
+          success: function (data) {
+            dataObject.length = 0;
+            var arrayLength = data['usertable'].length;
+            for (var i = 0; i < arrayLength; i++) {
+                dataObject.push(data['usertable'][i]);
+            }
+            userinfoTable.render();
+
+            if ('metatable' in data) {
+                metaObject.length = 0;
+                arrayLength = data['metatable'].length;
+                for (var i = 0; i < arrayLength; i++) {
+                    metaObject.push(data['metatable'][i]);
+                }
+                metaTable.render();
+            }
+            
+            var dt = new Date();
+            var utcDate = dt.toUTCString();
+            //$("#timestamp").text("Last update: " + utcDate);
+            $("#group_id_text").text("Current group id: " + spam_group_id);
+
+            var url_to_load = "/loadnetwork?" + "filename="+data['socialnetwork']; 
+            document.getElementById('includedSocialNetwork').src = url_to_load;
+            if (data['socialnetwork'] != '404') {
+                $("iframe").height("600px");
+            }
+            else {
+                $("iframe").height("100px");
+            }
+          }
+        });     
+        };
+
+function onClick(e){ 
+        window.open(e.dataPoint.link,'_blank');
+};
+
+    function actionRenderer (instance, td, row, col, prop, value, cellProperties) {
+    
+        var button = document.createElement("input");
+        button.type = "button";
+        button.value = value;
+        //button.onclick = updateChart;
+        button.addEventListener('click', function(){
+            spam_group_id = value;
+            updateChart();
+        });
+
+        Handsontable.Dom.addEvent(button, 'mousedown', function (e){
+            e.preventDefault(); // prevent selection quirk
+        });
+
+        Handsontable.Dom.empty(td);
+        td.appendChild(button);
+        
+        return td;
+    };
+
+
+  function flagRenderer (instance, td, row, col, prop, value, cellProperties) {
+    var language = value;
+    
+    if (language in langCodes) {
+            var escaped = Handsontable.helper.stringify(langCodes[language]),
+          img;
+
+        if (escaped.indexOf('http') === 0) {
+          img = document.createElement('IMG');
+          img.src = langCodes[language];
+
+          Handsontable.Dom.addEvent(img, 'mousedown', function (e){
+            e.preventDefault(); // prevent selection quirk
+          });
+
+          Handsontable.Dom.empty(td);
+          td.appendChild(img);
+        }
+        else {
+          // render as text
+          Handsontable.renderers.TextRenderer.apply(this, arguments);
+        }
+        return td;
+
+    } else {
+      var textNode = document.createTextNode(value === null ? '' : value);
+      td.appendChild(textNode);
+    }
+
+    return td;
+  };
+
+    function coverRenderer (instance, td, row, col, prop, value, cellProperties) {
+        var escaped = Handsontable.helper.stringify(value),
+          img;
+
+        if (escaped.indexOf('http') === 0) {
+          img = document.createElement('IMG');
+          img.src = value;
+
+          Handsontable.Dom.addEvent(img, 'mousedown', function (e){
+            e.preventDefault(); // prevent selection quirk
+          });
+
+          Handsontable.Dom.empty(td);
+          td.appendChild(img);
+        }
+        else {
+          // render as text
+          Handsontable.renderers.TextRenderer.apply(this, arguments);
+        }
+
+        return td;
+      };
+
+      $('.dropDownListItem').click(function (e) {
+            var name = e.currentTarget;
+            prefix = name.text;
+            // reset the group id to 1 to avoid index
+            // out of bounds error
+            spam_group_id = 1;
+            $("#prefix_text").text("Current URL: " + prefix);
+            updateChart();
+            //$("html, body").scrollTop($("#metainfo").offset().top);
+      });
+
+
+      //window.onload = function () {
+      //first bar chart 
+        chart = new CanvasJS.Chart("chartContainer", {
+
+        title:{
+          text:"Real Time Twitter Stream URL Top100",
+          fontSize: 25,
+        },
+        animationEnabled: true,
+        axisX:{
+          interval: 1,
+          gridThickness: 0,
+          labelFontSize: 14,
+          labelFontStyle: "normal",
+          labelFontWeight: "normal",
+          labelFontFamily: "Lucida Sans Unicode"
+        },
+        axisY2:{
+          interlacedColor: "rgba(1,77,101,.2)",
+          gridColor: "rgba(1,77,101,.1)",
+          labelFontSize: 14
+        },
+
+        data: [
+        {     
+          type: "bar",
+          cursor:"pointer",
+          click: onClick,  
+          name: "companies",
+          axisYType: "secondary",
+          color: "#014D65",
+          dataPoints: [
+
+          ]
+        }
+        
+          ]
+        });
+      chart.render();
+
+      // second pie chart
+      piechart = new CanvasJS.Chart("pieContainer",
+      {
+        title:{
+          text: "Twitter URL Analyzed: 1000",
+          fontSize: 25,
+        },
+        animationEnabled: true,
+        legend: {
+          horizontalAlign: "left", // "center" , "right"
+          verticalAlign: "center",  // "top" , "bottom"
+        },
+        data: [
+        {
+          indexLabelFontSize: 20,
+          indexLabelFontFamily: "Lucida Sans Unicode",       
+          indexLabelFontColor: "darkgrey", 
+          indexLabelLineColor: "darkgrey",        
+          indexLabelPlacement: "outside",
+          type: "pie",       
+          cursor:"pointer",
+          click: onClick,
+        showInLegend: false,
+        legendMarkerColor: "pink",
+        legendText:"Legend",
+          toolTipContent: "{y} - <strong>#percent%</strong>",
+          dataPoints: [
+          ]
+        }
+        ]
+        });
+        piechart.render();
+      //}
+
+      updateChart();
+      // generates first set of dataPoints.
+      updateUrlInfo(); 
+    
+      // update chart after specified time.
+      var updateInterval = 10000;
+      setInterval(function(){updateUrlInfo()}, updateInterval);
+
+      // create custom legend 
+      var legendListId = document.getElementById("legendList");
+      customLegends(chart,legendListId);
+
+      function customLegends(chart, legendListId){
+          custom_legend = [{"name": "Social Media URL","color": "#71c100"},
+                           {"name": "News media","color": "#6fa32e"},
+                           {"name": "Quran verses","color": "#ff0000"}, 
+                           {"name": "URL shorteners","color": "#ff9a00"},
+                           {"name": "Other","color": "#5e9cf2"}]
+          var arrayLength = custom_legend.length;
+            for (var i = 0; i < arrayLength; i++) {
+              var li = document.createElement("li");
+              li.style.color = custom_legend[i]["color"];
+              //li.style.type = "square";
+              li.appendChild(document.createTextNode(custom_legend[i]["name"]));
+              legendListId.appendChild(li); 
+              $('li').each(function (i) {
+                  $(this).attr('id', (i));
+              });
+          }
+      }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+config.txt
+*.pyc
+*/*.pyc
+env/
+twitter_stream_url_info.json
+processed_data/*/*_.json

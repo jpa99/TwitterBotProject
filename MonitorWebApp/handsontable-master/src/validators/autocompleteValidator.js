@@ -1,0 +1,54 @@
+/**
+ * Autocomplete cell validator.
+ *
+ * @private
+ * @validator AutocompleteValidator
+ * @param {*} value - Value of edited cell
+ * @param {Function} callback - Callback called with validation result
+ */
+function AutocompleteValidator(value, callback) {
+  if (value == null) {
+    value = '';
+  }
+
+  if (this.allowEmpty && value === '') {
+    callback(true);
+
+    return;
+  }
+
+  if (this.strict && this.source) {
+    if (typeof this.source === 'function') {
+      this.source(value, process(value, callback));
+    } else {
+      process(value, callback)(this.source);
+    }
+  } else {
+    callback(true);
+  }
+};
+
+export default AutocompleteValidator;
+
+/**
+ * Function responsible for validation of autocomplete value.
+ *
+ * @param {*} value - Value of edited cell
+ * @param {Function} callback - Callback called with validation result
+ */
+function process(value, callback) {
+  var originalVal = value;
+
+  return function(source) {
+    var found = false;
+
+    for (var s = 0, slen = source.length; s < slen; s++) {
+      if (originalVal === source[s]) {
+        found = true; // perfect match
+        break;
+      }
+    }
+
+    callback(found);
+  };
+}

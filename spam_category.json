@@ -1,0 +1,282 @@
+[{
+  "viid": {
+    "click bait": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "porn": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "bot followers": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "malware": {
+      "spam_group_id": [1, 2],
+      "total_user": [29, 128]
+    },
+    "news bot": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "goo": {
+    "click bait": {
+      "spam_group_id": [1, 2, 3, 4, 7, 9, 10],
+      "total_user": [69, 60, 29, 235, 92, 25, 123]
+    },
+    "porn": {
+      "spam_group_id": [5, 6],
+      "total_user": [17, 38]
+    },
+    "bot followers": {
+      "spam_group_id": [8],
+      "total_user": [24]
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "bit": {
+    "click bait": {
+      "spam_group_id": [4, 6, 10, 11, 18, 22],
+      "total_user": [21, 17, 35, 68, 36, 20]
+    },
+    "porn": {
+      "spam_group_id": [9, 19, 20],
+      "total_user": [17, 12, 17]
+    },
+    "bot followers": {
+      "spam_group_id": [7, 8, 13, 15, 21],
+      "total_user": [11, 94, 104, 18, 30]
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [2],
+      "total_user": [50]
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [1, 3, 5, 12, 14, 16, 17, 23, 24],
+      "total_user": [14, 15, 20, 19, 20, 11, 22, 14, 16],
+      "feature": ["horoscope", "horoscope", "horoscope", "horoscope", "horoscope", "horoscope", "horoscope", "horoscope", "horoscope"]
+    }
+  }
+}, {
+  "dld": {
+    "click bait": {
+      "spam_group_id": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "total_user": [34, 34, 37, 48, 22, 35, 15, 19, 21, 49]
+    },
+    "porn": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "bot followers": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "ift": {
+    "click bait": {
+      "spam_group_id": [1, 2],
+      "total_user": [48, 185]
+    },
+    "porn": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "bot followers": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [3],
+      "total_user": [76]
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [4],
+      "total_user": [12],
+      "feature": ["withheld"]
+    }
+  }
+}, {
+  "dlvr": {
+    "click bait": {
+      "spam_group_id": [6, 21, 27, 28, 29, 30],
+      "total_user": [100, 11, 25, 54, 23, 19]
+    },
+    "porn": {
+      "spam_group_id": [22],
+      "total_user": [37]
+    },
+    "bot followers": {
+      "spam_group_id": [9],
+      "total_user": [108]
+    },
+    "malware": {
+      "spam_group_id": [15],
+      "total_user": [13]
+    },
+    "news bot": {
+      "spam_group_id": [1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 23, 24, 25, 26],
+      "total_user": [11, 19, 33, 25, 22, 28, 242, 18, 43, 21, 24, 11, 23, 20, 36, 21, 16, 118, 23, 33, 30]
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "ow": {
+    "click bait": {
+      "spam_group_id": [1, 2, 4, 5, 6, 7, 8, 9],
+      "total_user": [19, 102, 14, 28, 397, 92, 78, 52]
+    },
+    "porn": {
+      "spam_group_id": [3],
+      "total_user": [116]
+    },
+    "bot followers": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "lnis": {
+    "click bait": {
+      "spam_group_id": [6],
+      "total_user": [17]
+    },
+    "porn": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "bot followers": {
+      "spam_group_id": [4, 7],
+      "total_user": [29, 86]
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [2, 3, 5],
+      "total_user": [26, 46, 48]
+    },
+    "Quran verses": {
+      "spam_group_id": [1],
+      "total_user": [5605]
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}, {
+  "tinyurl": {
+    "click bait": {
+      "spam_group_id": [1, 2, 3, 4, 5, 6],
+      "total_user": [20, 20, 440, 90, 110, 19]
+    },
+    "porn": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "bot followers": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "malware": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "news bot": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "Quran verses": {
+      "spam_group_id": [],
+      "total_user": []
+    },
+    "other": {
+      "spam_group_id": [],
+      "total_user": []
+    }
+  }
+}]
