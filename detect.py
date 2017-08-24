@@ -498,7 +498,7 @@ if __name__ == '__main__':
 
     
     """
-        start the streamer first (optional)
+        start the streamer first (optional if the dataset already exists)
     """
 
     streamer.collect(keyword=KEYWORD, filename=util.get_full_src_path(prefix), num_tweets=NUM_TWEETS)
@@ -529,12 +529,6 @@ if __name__ == '__main__':
         returns a final result of percent of spams
     """
     detector.get_percent_of_spam()
-    #update_webapp(keyword)
-    #detector.parameter_sweeping_plot(percent_same = 0.6)
-    #detector.parameter_sweeping(min_duplicate_factor = 3, percent_same = 0.6)
-    #detector.get_trump_spam_group()
-    #detector.analyze_user_group()
-    #detector.print_metadata()
 
 
 
