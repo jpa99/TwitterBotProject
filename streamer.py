@@ -40,10 +40,11 @@ access_token_secret="HIR4DQEyHVPrvXm2XNsTToVcgIgxWM2WR2eOoaY1iJV6R"
 finish_collection = False
 def load_directory():
     # directory will be the first entry
-    with open('config.txt', 'r') as f:
-        for line in f:
-            return line.strip()
-DATA_DIR = load_directory()
+    with open('config.json') as json_data_file:
+            data = json.load(json_data_file)
+            return data
+
+DATA_DIR = load_directory()["PATH_RAWDATA"]
 
 def get_embedded_url(tweet):
 	urlcount = 0

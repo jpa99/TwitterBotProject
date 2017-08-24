@@ -13,10 +13,11 @@ import detect
 
 def load_directory():
     # directory will be the first entry
-    with open('config.txt', 'r') as f:
-        for line in f:
-            return line.strip()
-DATA_DIR = load_directory()
+    with open('config.json') as json_data_file:
+            data = json.load(json_data_file)
+            return data
+
+DATA_DIR = load_directory()["PATH_RAWDATA"]
 
 def get_full_prefix(prefix):
 	return 'processed_data/' + prefix + '/' + prefix + '_tweet_'
