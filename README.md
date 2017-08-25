@@ -18,10 +18,12 @@ How to get started:
  * `virtualenv env` (this is only needed when you first clone the project)
  * `source env/bin/activate`
  * `pip install -r requirements.txt`
+ * ```export TwitterBotProjectPath=`pwd` ```
  * Now you are good to go!
  
  
  * You can try running script: `python detect.py`
+ * `cd & python -m TwitterBotProject.feature.feature_extraction` (Important, you must run sub module scripts one level above the repo directory)
 
 
 How to contribute (I can teach you the whole process if you haven't done that before):

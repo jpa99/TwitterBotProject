@@ -11,9 +11,10 @@ import pprint
 import timeline_new
 import detect
 
+TwitterBotProjectPath = os.environ['TwitterBotProjectPath']
 def load_directory():
     # directory will be the first entry
-    with open('config.json') as json_data_file:
+    with open(TwitterBotProjectPath + '/config.json') as json_data_file:
             data = json.load(json_data_file)
             return data
 

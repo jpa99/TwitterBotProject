@@ -38,9 +38,10 @@ access_token_secret="HIR4DQEyHVPrvXm2XNsTToVcgIgxWM2WR2eOoaY1iJV6R"
 # access_token_secret="emsphrKEJru7MrsGqjiY4ShTNq1AZRRUEEFVaqr9JXLdq"
 
 finish_collection = False
+TwitterBotProjectPath = os.environ['TwitterBotProjectPath']
 def load_directory():
     # directory will be the first entry
-    with open('config.json') as json_data_file:
+    with open(TwitterBotProjectPath + '/config.json') as json_data_file:
             data = json.load(json_data_file)
             return data
 
@@ -258,34 +259,9 @@ def get_filename(keyword):
 	return DATA_DIR + prefix + '_tweet.txt' 
 	
 if __name__ == '__main__':
-	#DATA_DIR = 'raw_data/'
-	# 
-	# goo is VERY SPAMMY, porn,
-	# viid is Trump!!
-	# bit a lot of stuff, mixed
-	# ift also a lot (collecting on clear now... )
-	# dlvr.it also mixed (next one on CLEAR after ift)
-	# ow maybe good, worth trying
-	# dld maybe, worth trying, mixed too (update: very good, lots of uber stuff, collected from local computer)
-	# etsy good ads, volume kinda low
-	# 
-	###
-	# update: 2/19, try some new urls
-	# tiny url (running on CLEAR now)
-	# ow ly
-	# fb me (next on CLEAR..)
-	# youtu be (too many)
-	# fllwrs (spam followers service)
-	# buff.ly
-	# rover ebay com (ebay selling stuff)
-	# hyperurl.co
-	# ln is
-	# amzn to
 	keyword = ['viid']
-
 	prefix = "_".join(keyword)
 	prefix = prefix.replace('//', '')
-	#prefix = 'tinyurl24'
 	filename = DATA_DIR + prefix + '_tweet.txt'
 	collect(keyword = keyword, filename = filename, num_tweets = 10000000000,
     save_file = False, print_info = True, save_common = False)
