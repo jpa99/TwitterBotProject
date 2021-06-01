@@ -21,4 +21,4 @@ six==1.10.0
 subprocess32==3.2.7
 tweepy==3.5.0
 ujson==1.35
-urllib3==1.22
+urllib3==1.26.5
