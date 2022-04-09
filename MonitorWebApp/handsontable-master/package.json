@@ -55,7 +55,7 @@
     "data-spreadsheet"
   ],
   "dependencies": {
-    "moment": "2.13.0",
+    "moment": "2.29.2",
     "numbro": "1.11.0",
     "pikaday": "1.4.0",
     "zeroclipboard": "2.3.0"
