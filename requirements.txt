@@ -8,7 +8,7 @@ httplib2==0.10.3
 idna==2.6
 matplotlib==2.0.2
 nltk==3.2.4
-numpy==1.13.1
+numpy==1.21.0
 oauth2==1.9.0.post1
 oauthlib==2.0.2
 pymongo==3.5.1
